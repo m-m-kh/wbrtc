@@ -1,9 +1,15 @@
-let peerConnection = new RTCPeerConnection()
+const configuration = {
+    iceServers: [
+        { urls: 'stun:stun.l.google.com:19302' }
+    ]
+};
+let peerConnection = new RTCPeerConnection(configuration)
 let localStream;
 let remoteStream;
 
 let init = async () => {
-    localStream = await navigator.mediaDevices.getUserMedia({video:true, audio:false})
+    // localStream = await navigator.mediaDevices.getUserMedia({video:true, audio:false})
+    localStream = await navigator.mediaDevices.getDisplayMedia()
     remoteStream = new MediaStream()
     document.getElementById('user-1').srcObject = localStream
     document.getElementById('user-2').srcObject = remoteStream

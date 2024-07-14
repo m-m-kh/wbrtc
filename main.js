@@ -8,8 +8,15 @@ let localStream;
 let remoteStream;
 
 let init = async () => {
-    // localStream = await navigator.mediaDevices.getUserMedia({video:true, audio:false})
-    localStream = await navigator.mediaDevices.getDisplayMedia()
+    try{
+        localStream = await navigator.mediaDevices.getUserMedia({video:true, audio:false})
+    }
+    catch{
+
+        localStream = await navigator.mediaDevices.getDisplayMedia()
+    }
+    
+    console.log(localStream)
     remoteStream = new MediaStream()
     document.getElementById('user-1').srcObject = localStream
     document.getElementById('user-2').srcObject = remoteStream
